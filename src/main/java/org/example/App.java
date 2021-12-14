@@ -2,8 +2,6 @@ package org.example;
 
 import org.example.daos.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -12,15 +10,15 @@ public class App {
 
     Scanner scan = new Scanner(System.in);
 
-    static private MainDao<Student> studentDao;
-    static private MainDao<Teacher> teacherDao;
-    static private MainDao<Course> courseDao;
-    static private MainDao<Programme> programmeDao;
+    private MainDao<Student> studentDao;
+    private MainDao<Teacher> teacherDao;
+    private MainDao<Course> courseDao;
+    private MainDao<Programme> programmeDao;
 
-    static private Student student;
-    static private Teacher teacher;
-    static private Course course;
-    static private Programme programme;
+    private Student student;
+    private Teacher teacher;
+    private Course course;
+    private Programme programme;
 
     void initializer(){
         studentDao = new StudentDao();

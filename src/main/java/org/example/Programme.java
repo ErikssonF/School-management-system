@@ -3,7 +3,6 @@ package org.example;
 import org.example.daos.CourseDao;
 import org.example.daos.ProgrammeDao;
 import org.example.daos.StudentDao;
-import org.example.daos.TeacherDao;
 
 import javax.persistence.*;
 import java.util.ArrayList;

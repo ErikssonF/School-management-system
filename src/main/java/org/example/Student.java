@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.daos.StudentDao;
+
 import javax.persistence.*;
 
 @Entity
@@ -75,5 +77,17 @@ public class Student {
             SSN = app.verifyString("Personnumret som är angivet är felaktigt, försök igen.");
 
         return new Student(firstName,lastName,SSN);
+    }
+
+    public Student studentValuesUpdate() {
+        StudentDao studentDao = new StudentDao();
+        App app = new App();
+
+        Student student = studentDao.getById("Skriv in id för den student du vill uppdatera");
+        student.setFirstName(app.verifyString("Ange förnamn: "));
+        student.setLastName(app.verifyString("Ange efternamn: "));
+        student.setSSN(app.verifyString("Ange personnummer, endast siffror (12 siffror): "));
+
+        return student;
     }
 }

@@ -1,6 +1,6 @@
 package org.example.daos;
 
-import org.example.Student;
+import org.example.App;
 import org.example.Teacher;
 
 import javax.persistence.TypedQuery;
@@ -8,9 +8,11 @@ import java.util.List;
 
 public class TeacherDao implements MainDao<Teacher> {
     Manager m;
+    App app;
 
     public TeacherDao() {
         m = new Manager();
+        app = new App();
     }
 
     @Override
@@ -44,5 +46,11 @@ public class TeacherDao implements MainDao<Teacher> {
     public List<Teacher> showAll() {
         TypedQuery<Teacher> query = m.em.createQuery("SELECT t FROM Teacher t", Teacher.class);
         return query.getResultList();
+    }
+
+    @Override
+    public Teacher getById(String question) {
+        int id = app.verifyInteger(question);
+        return m.em.find(Teacher.class, id);
     }
 }

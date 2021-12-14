@@ -8,4 +8,5 @@ public interface MainDao<T> {
     void remove(T t);
     List<T> showSpecificInfo(int id);
     List<T> showAll();
+    T getById(String question);
 }

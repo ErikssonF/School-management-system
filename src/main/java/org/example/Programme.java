@@ -1,6 +1,12 @@
 package org.example;
 
+import org.example.daos.CourseDao;
+import org.example.daos.ProgrammeDao;
+import org.example.daos.StudentDao;
+import org.example.daos.TeacherDao;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -67,6 +73,38 @@ public class Programme {
                ", courseList=" + courseList +
                ", studentList=" + studentList +
                '}';
+    }
+
+    Programme programmeValuesInput() {
+        App app = new App();
+        StudentDao studentDao = new StudentDao();
+        CourseDao courseDao = new CourseDao();
+
+        programmeName = app.verifyString("Utbildningens namn: ");
+        courseList.add(courseDao.getById("Skriv in id för den kurs du vill lägga till i utbildningen"));
+        studentList.add(studentDao.getById("Skriv in id för den student du vill lägga till i utbildningen"));
+
+        return new Programme(programmeName, courseList, studentList);
+    }
+
+    public Programme programmeValuesUpdate() {
+        ProgrammeDao programmeDao = new ProgrammeDao();
+        CourseDao courseDao = new CourseDao();
+        StudentDao studentDao = new StudentDao();
+        App app = new App();
+
+        Programme programme = programmeDao.getById("Skriv in id för den utbildning du vill uppdatera");
+        programme.setProgrammeName(app.verifyString("Ange utbildningens namn: "));
+
+        List<Course> courseList = new ArrayList<>();
+        courseList.add(courseDao.getById("Skriv in id för den kurs du vill lägga till i utbildningen"));
+        programme.setCourseList(courseList);
+
+        List<Student> studentList = new ArrayList<>();
+        studentList.add(studentDao.getById("Skriv in id för den student du vill lägga till i utbildningen"));
+        programme.setStudentList(studentList);
+
+        return programme;
     }
 }
 

@@ -1,6 +1,11 @@
 package org.example;
 
+import org.example.daos.CourseDao;
+import org.example.daos.StudentDao;
+import org.example.daos.TeacherDao;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -55,4 +60,30 @@ public class Course {
                ", teacherList=" + teacherList +
                '}';
     }
+
+    Course courseValuesInput() {
+        App app = new App();
+        TeacherDao teacherDao = new TeacherDao();
+
+        courseName = app.verifyString("Kursens namn: ");
+        teacherList.add(teacherDao.getById("Skriv in id för den lärare du vill lägga till i kursen"));
+
+        return new Course(courseName, teacherList);
+    }
+
+    public Course courseValuesUpdate() {
+        CourseDao courseDao = new CourseDao();
+        TeacherDao teacherDao = new TeacherDao();
+        App app = new App();
+
+        Course course = courseDao.getById("Skriv in id för den kurs du vill uppdatera");
+        course.setCourseName(app.verifyString("Ange kursen namn: "));
+
+        List<Teacher> teacherList = new ArrayList<>();
+        teacherList.add(teacherDao.getById("Skriv in id för den lärare du vill lägga till i kursen"));
+        course.setTeacherList(teacherList);
+
+        return course;
+    }
+
 }

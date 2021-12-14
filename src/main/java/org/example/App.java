@@ -2,6 +2,8 @@ package org.example;
 
 import org.example.daos.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -10,15 +12,15 @@ public class App {
 
     Scanner scan = new Scanner(System.in);
 
-    private MainDao<Student> studentDao;
-    private MainDao<Teacher> teacherDao;
-    private MainDao<Course> courseDao;
-    private MainDao<Programme> programmeDao;
+    static private MainDao<Student> studentDao;
+    static private MainDao<Teacher> teacherDao;
+    static private MainDao<Course> courseDao;
+    static private MainDao<Programme> programmeDao;
 
-    private Student student;
-    private Teacher teacher;
-    private Course course;
-    private Programme programme;
+    static private Student student;
+    static private Teacher teacher;
+    static private Course course;
+    static private Programme programme;
 
     void initializer(){
         studentDao = new StudentDao();
@@ -49,93 +51,136 @@ public class App {
     }
 
     private void printMenu() {
-        System.out.println("gör ditt val");
+        System.out.println("""
+        
+        Huvudmeny, vad vill du ändra?
+            1. Student
+            2. Lärare
+            3. Kurs
+            4. Utbildning
+            0. Avsluta programmet""");
     }
 
     private void mainMenu(int menuChoice) {
-
-        System.out.println("mainMenu-Test");
-
         switch(menuChoice) {
             case 1 -> studentMenu();
-            case 2 -> courseMenu();
-            case 3 -> teacherMenu();
+            case 2 -> teacherMenu();
+            case 3 -> courseMenu();
             case 4 -> programmeMenu();
             default -> run = false;
         }
     }
 
     private void studentMenu() {
+        System.out.println("""
+        
+        Studentmeny
+            1. Lägg till ny
+            2. Uppdatera nuvarande
+            3. Ta bort
+            4. Visa alla studenter
+            5. Visa specifik student
+            0. Avsluta programmet""");
 
-        System.out.println("studentmenu");
         int menuChoice = Integer.parseInt(scan.nextLine());
 
         switch(menuChoice) {
             case 1 -> studentDao.add(student.studentValuesInput());
-            case 2 -> courseMenu();
-            case 3 -> teacherMenu();
-            case 4 -> programmeMenu();
-            default -> run = false;
-        }
-    }
-
-    private void courseMenu() {
-
-        int menuChoice = Integer.parseInt(scan.nextLine());
-
-        switch(menuChoice) {
-            case 1 -> studentMenu();
-            case 2 -> courseMenu();
-            case 3 -> teacherMenu();
-            case 4 -> programmeMenu();
+            case 2 -> studentDao.update(student.studentValuesUpdate());
+            case 3 -> studentDao.remove(studentDao.getById("Skriv in det id på den student du vill ta bort"));
+            case 4 -> studentDao.showAll().forEach(System.out::println);
+            case 5 -> System.out.println(studentDao.getById("Skriv in det id på den student du vill visa"));
             default -> run = false;
         }
     }
 
     private void teacherMenu() {
+        System.out.println("""
+        
+        Lärarmeny
+            1. Lägg till ny
+            2. Uppdatera nuvarande
+            3. Ta bort
+            4. Visa alla lärare
+            5. Visa specifik lärare
+            0. Avsluta programmet""");
 
         int menuChoice = Integer.parseInt(scan.nextLine());
 
         switch(menuChoice) {
-            case 1 -> studentMenu();
-            case 2 -> courseMenu();
-            case 3 -> teacherMenu();
-            case 4 -> programmeMenu();
+            case 1 -> teacherDao.add(teacher.teacherValuesInput());
+            case 2 -> teacherDao.update(teacher.teacherValuesUpdate());
+            case 3 -> teacherDao.remove(teacherDao.getById("Skriv in det id på den student du vill ta bort"));
+            case 4 -> teacherDao.showAll().forEach(System.out::println);
+            case 5 -> System.out.println(teacherDao.getById("Skriv in det id på den student du vill visa"));
+            default -> run = false;
+        }
+    }
+
+    private void courseMenu() {
+        System.out.println("""
+        
+        Kursmeny
+            1. Lägg till ny
+            2. Uppdatera nuvarande
+            3. Ta bort
+            4. Visa alla kurser
+            5. Visa specifik kurs
+            0. Avsluta programmet""");
+
+        int menuChoice = Integer.parseInt(scan.nextLine());
+
+        switch(menuChoice) {
+            case 1 -> courseDao.add(course.courseValuesInput());
+            case 2 -> courseDao.update(course.courseValuesUpdate());
+            case 3 -> courseDao.remove(courseDao.getById("Skriv in det id på den student du vill ta bort"));
+            case 4 -> courseDao.showAll().forEach(System.out::println);
+            case 5 -> System.out.println(courseDao.getById("Skriv in det id på den student du vill visa"));
             default -> run = false;
         }
     }
 
     private void programmeMenu() {
+        System.out.println("""
+        
+        Utbildningsmeny
+            1. Lägg till ny
+            2. Uppdatera nuvarande
+            3. Ta bort
+            4. Visa alla utbildningar
+            5. Visa specifik utbildning
+            0. Avsluta programmet""");
 
         int menuChoice = Integer.parseInt(scan.nextLine());
 
         switch(menuChoice) {
-            case 1 -> studentMenu();
-            case 2 -> courseMenu();
-            case 3 -> teacherMenu();
-            case 4 -> programmeMenu();
+            case 1 -> programmeDao.add(programme.programmeValuesInput());
+            case 2 -> programmeDao.update(programme.programmeValuesUpdate());
+            case 3 -> programmeDao.remove(programmeDao.getById("Skriv in det id på den student du vill ta bort"));
+            case 4 -> programmeDao.showAll().forEach(System.out::println);
+            case 5 -> System.out.println(programmeDao.getById("Skriv in det id på den student du vill visa"));
             default -> run = false;
         }
 
     }
 
-    String verifyString(String input) {
+    public String verifyString(String input) {
         System.out.println(input);
 
         while (scan.hasNextInt()) {
             System.out.println("Ej giltig input, försök igen");
             scan.next();
         }
-        return scan.next();
+        return scan.nextLine();
     }
 
-    int verifyInteger(String input) {
+    public int verifyInteger(String input) {
         System.out.println(input);
 
         while (!scan.hasNextInt()) {
             System.out.println("Ej giltig input, försök igen");
             scan.next();
         }
-        return Integer.parseInt(scan.next());
+        return Integer.parseInt(scan.nextLine());
     }
 }

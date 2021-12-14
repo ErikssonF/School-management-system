@@ -2,7 +2,7 @@ package org.example.daos;
 
 import java.util.List;
 
-interface MainDao<T> {
+public interface MainDao<T> {
     void add(T t);
     void update(T t);
     void remove(T t);

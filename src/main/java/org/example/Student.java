@@ -1,7 +1,6 @@
 package org.example;
 
 import javax.persistence.*;
-import java.sql.Date;
 
 @Entity
 public class Student {
@@ -12,10 +11,9 @@ public class Student {
 
     private String firstName;
     private String lastName;
-    private Date SSN;
+    private String SSN;
 
-    public Student(int studentId, String firstName, String lastName, Date SSN) {
-        this.studentId = studentId;
+    public Student(String firstName, String lastName, String SSN) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.SSN = SSN;
@@ -48,11 +46,11 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public Date getSSN() {
+    public String getSSN() {
         return SSN;
     }
 
-    public void setSSN(Date SSN) {
+    public void setSSN(String SSN) {
         this.SSN = SSN;
     }
 

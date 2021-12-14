@@ -15,10 +15,9 @@ public class Teacher {
 
     private String firstName;
     private String lastName;
-    private Date SSN;
+    private String SSN;
 
-    public Teacher(int teacherId, String firstName, String lastName, Date SSN) {
-        this.teacherId = teacherId;
+    public Teacher(String firstName, String lastName, String SSN) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.SSN = SSN;
@@ -51,11 +50,11 @@ public class Teacher {
         this.lastName = lastName;
     }
 
-    public Date getSSN() {
+    public String getSSN() {
         return SSN;
     }
 
-    public void setSSN(Date SSN) {
+    public void setSSN(String SSN) {
         this.SSN = SSN;
     }
 

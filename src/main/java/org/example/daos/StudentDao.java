@@ -2,12 +2,13 @@ package org.example.daos;
 
 import org.example.Student;
 
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class StudentDao implements MainDao<Student> {
     Manager m;
 
-    StudentDao() {
+    public StudentDao() {
         m = new Manager();
     }
 
@@ -20,22 +21,28 @@ public class StudentDao implements MainDao<Student> {
 
     @Override
     public void update(Student student) {
-
+        m.em.getTransaction().begin();
+        m.em.merge(student);
+        m.em.getTransaction().commit();
     }
 
     @Override
     public void remove(Student student) {
-
+        m.em.getTransaction().begin();
+        m.em.remove(student);
+        m.em.getTransaction().commit();
     }
 
     @Override
     public List<Student> showSpecificInfo(int id) {
-        return null;
+        TypedQuery<Student> query = m.em.createQuery("SELECT s FROM Student s WHERE studentId = :id", Student.class);
+        return query.setParameter("id", id).getResultList();
     }
 
     @Override
     public List<Student> showAll() {
-        return null;
+        TypedQuery<Student> query = m.em.createQuery("SELECT s FROM Student s", Student.class);
+        return query.getResultList();
     }
 
 }

@@ -15,8 +15,7 @@ public class Course {
     @ManyToMany(targetEntity = Teacher.class)
     private List<Teacher> teacherList;
 
-    public Course(int courseId, String courseName, List<Teacher> teacherList) {
-        this.courseId = courseId;
+    public Course(String courseName, List<Teacher> teacherList) {
         this.courseName = courseName;
         this.teacherList = teacherList;
     }

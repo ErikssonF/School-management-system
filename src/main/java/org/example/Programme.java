@@ -18,8 +18,7 @@ public class Programme {
     @OneToMany(targetEntity = Student.class)
     private List<Student> studentList;
 
-    public Programme(int programmeId, String programmeName, List<Course> courseList, List<Student> studentList) {
-        this.programmeId = programmeId;
+    public Programme(String programmeName, List<Course> courseList, List<Student> studentList) {
         this.programmeName = programmeName;
         this.courseList = courseList;
         this.studentList = studentList;

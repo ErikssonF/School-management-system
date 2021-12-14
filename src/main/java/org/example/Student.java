@@ -63,4 +63,17 @@ public class Student {
                ", SSN=" + SSN +
                '}';
     }
+
+    Student studentValuesInput() {
+        App app = new App();
+
+        firstName = app.verifyString("Ange förnamn: ");
+        lastName = app.verifyString("Ange efternamn: ");
+        SSN = app.verifyString("Ange personnummer, endast siffror (12 siffror): ");
+
+        while (SSN.length() != 12)
+            SSN = app.verifyString("Personnumret som är angivet är felaktigt, försök igen.");
+
+        return new Student(firstName,lastName,SSN);
+    }
 }

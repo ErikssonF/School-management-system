@@ -7,33 +7,31 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class CourseDao implements MainDao<Course> {
-    Manager m;
-    App app;
+    DatabaseConnection m = new DatabaseConnection();
+    App app = new App();
 
     public CourseDao() {
-        m = new Manager();
-        app = new App();
     }
 
     @Override
     public void add(Course course) {
-        m.em.getTransaction().begin();
+        m.begin();
         m.em.persist(course);
-        m.em.getTransaction().commit();
+        m.commit();
     }
 
     @Override
     public void update(Course course) {
-        m.em.getTransaction().begin();
+        m.begin();
         m.em.merge(course);
-        m.em.getTransaction().commit();
+        m.commit();
     }
 
     @Override
     public void remove(Course course) {
-        m.em.getTransaction().begin();
+        m.begin();
         m.em.remove(course);
-        m.em.getTransaction().commit();
+        m.commit();
     }
 
     @Override

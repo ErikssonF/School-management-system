@@ -7,12 +7,10 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class TeacherDao implements MainDao<Teacher> {
-    Manager m;
-    App app;
+    DatabaseConnection m = new DatabaseConnection();
+    App app = new App();
 
     public TeacherDao() {
-        m = new Manager();
-        app = new App();
     }
 
     @Override

@@ -65,6 +65,7 @@ public class Course {
         TeacherDao teacherDao = new TeacherDao();
 
         courseName = app.verifyString("Kursens namn: ");
+        List<Teacher> teacherList = new ArrayList<>();
         teacherList.add(teacherDao.getById("Skriv in id för den lärare du vill lägga till i kursen"));
 
         return new Course(courseName, teacherList);

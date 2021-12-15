@@ -10,10 +10,10 @@ public class App {
 
     Scanner scan = new Scanner(System.in);
 
-    public MainDao<Student> studentDao;
-    public MainDao<Teacher> teacherDao;
-    public MainDao<Course> courseDao;
-    public MainDao<Programme> programmeDao;
+    public StudentDao studentDao;
+    public TeacherDao teacherDao;
+    public CourseDao courseDao;
+    public ProgrammeDao programmeDao;
 
     public Student student;
     public Teacher teacher;
@@ -55,7 +55,7 @@ public class App {
             1. Student
             2. Lärare
             3. Kurs
-            4. Utbildning
+            4. Program
             5. Statistik
             0. Avsluta programmet""");
     }
@@ -73,17 +73,40 @@ public class App {
     }
 
     private void statisticsMenu() {
+        System.out.println("""
+        
+        Statistikmeny
+            1. Visa antal kurser i skolan
+            2. Visa antal kurser i ett program
+            3. Visa antal elever i skolan
+            4. Visa antal elever i ett program
+            5. Visa antal lärare i skolan
+            6. Visa antal lärare i en kurs
+            0. Tillbaka till huvudmeny""");
+
+        int menuChoice = Integer.parseInt(scan.nextLine());
+
+        switch(menuChoice) {
+//            case 1 -> courseDao.numberOfCoursesInSchool().forEach(System.out::println);
+//            case 2 -> courseDao.update(student.studentValuesUpdate());
+            case 3 -> studentDao.numberOfStudentsInSchool();
+            case 4 -> studentDao.numberOfStudentsInProgramme(verifyInteger("Skriv programmets id: "));
+//            case 5 -> teacherDao.numberOfTeachersInSchool().forEach(System.out::println);
+//            case 5 -> teacherDao.numberOfTeachersInSchool().forEach(System.out::println);
+            case 0 -> run = false;
+            default -> System.out.println("Fel input prova igen");
+        }
     }
 
     private void studentMenu() {
         System.out.println("""
         
-        Studentmeny
+        Elevmeny
             1. Lägg till ny
             2. Uppdatera nuvarande
             3. Ta bort
-            4. Visa alla studenter
-            5. Visa specifik student
+            4. Visa alla elever
+            5. Visa specifik elev
             0. Tillbaka till huvudmeny""");
 
         int menuChoice = Integer.parseInt(scan.nextLine());
@@ -91,9 +114,9 @@ public class App {
         switch(menuChoice) {
             case 1 -> studentDao.add(student.studentValuesInput());
             case 2 -> studentDao.update(student.studentValuesUpdate());
-            case 3 -> studentDao.remove(studentDao.getById("Skriv in det id på den student du vill ta bort"));
+            case 3 -> studentDao.remove(studentDao.getById("Skriv in det id på den elev du vill ta bort"));
             case 4 -> studentDao.showAll().forEach(System.out::println);
-            case 5 -> System.out.println(studentDao.getById("Skriv in det id på den student du vill visa"));
+            case 5 -> System.out.println(studentDao.getById("Skriv in det id på den elev du vill visa"));
             case 0 -> run = false;
             default -> System.out.println("Fel input prova igen");
         }
@@ -115,9 +138,9 @@ public class App {
         switch(menuChoice) {
             case 1 -> teacherDao.add(teacher.teacherValuesInput());
             case 2 -> teacherDao.update(teacher.teacherValuesUpdate());
-            case 3 -> teacherDao.remove(teacherDao.getById("Skriv in det id på den student du vill ta bort"));
+            case 3 -> teacherDao.remove(teacherDao.getById("Skriv in det id på den lärare du vill ta bort"));
             case 4 -> teacherDao.showAll().forEach(System.out::println);
-            case 5 -> System.out.println(teacherDao.getById("Skriv in det id på den student du vill visa"));
+            case 5 -> System.out.println(teacherDao.getById("Skriv in det id på den lärare du vill visa"));
             case 0 -> run = false;
             default -> System.out.println("Fel input prova igen");
         }
@@ -139,9 +162,9 @@ public class App {
         switch(menuChoice) {
             case 1 -> courseDao.add(course.courseValuesInput());
             case 2 -> courseDao.update(course.courseValuesUpdate());
-            case 3 -> courseDao.remove(courseDao.getById("Skriv in det id på den student du vill ta bort"));
+            case 3 -> courseDao.remove(courseDao.getById("Skriv in det id på den kurs du vill ta bort"));
             case 4 -> courseDao.showAll().forEach(System.out::println);
-            case 5 -> System.out.println(courseDao.getById("Skriv in det id på den student du vill visa"));
+            case 5 -> System.out.println(courseDao.getById("Skriv in det id på den kurs du vill visa"));
             case 0 -> run = false;
             default -> System.out.println("Fel input prova igen");
         }
@@ -150,12 +173,12 @@ public class App {
     private void programmeMenu() {
         System.out.println("""
         
-        Utbildningsmeny
+        Programmeny
             1. Lägg till ny
             2. Uppdatera nuvarande
             3. Ta bort
-            4. Visa alla utbildningar
-            5. Visa specifik utbildning
+            4. Visa alla program
+            5. Visa specifikt program
             0. Tillbaka till huvudmeny""");
 
         int menuChoice = Integer.parseInt(scan.nextLine());
@@ -163,9 +186,9 @@ public class App {
         switch(menuChoice) {
             case 1 -> programmeDao.add(programme.programmeValuesInput());
             case 2 -> programmeDao.update(programme.programmeValuesUpdate());
-            case 3 -> programmeDao.remove(programmeDao.getById("Skriv in det id på den student du vill ta bort"));
+            case 3 -> programmeDao.remove(programmeDao.getById("Skriv in det id på det program du vill ta bort"));
             case 4 -> programmeDao.showAll().forEach(System.out::println);
-            case 5 -> System.out.println(programmeDao.getById("Skriv in det id på den student du vill visa"));
+            case 5 -> System.out.println(programmeDao.getById("Skriv in det id på det program du vill visa"));
             case 0 -> run = false;
             default -> System.out.println("Fel input prova igen");
         }

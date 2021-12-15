@@ -17,11 +17,13 @@ public class Teacher {
     private String firstName;
     private String lastName;
     private String SSN;
+    private int courseId;
 
-    public Teacher(String firstName, String lastName, String SSN) {
+    public Teacher(String firstName, String lastName, String SSN, int courseId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.SSN = SSN;
+        this.courseId = courseId;
     }
 
     public Teacher() {
@@ -59,13 +61,22 @@ public class Teacher {
         this.SSN = SSN;
     }
 
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
+
     @Override
     public String toString() {
         return "Teacher{" +
                "teacherId=" + teacherId +
                ", firstName='" + firstName + '\'' +
                ", lastName='" + lastName + '\'' +
-               ", SSN=" + SSN +
+               ", SSN='" + SSN + '\'' +
+               ", courseId=" + courseId +
                '}';
     }
 
@@ -79,7 +90,9 @@ public class Teacher {
         while (SSN.length() != 12)
             SSN = app.verifyString("Personnumret som är angivet är felaktigt, försök igen.");
 
-        return new Teacher(firstName,lastName,SSN);
+        courseId = app.verifyInteger("Ange programmets ID: ");
+
+        return new Teacher(firstName,lastName,SSN, courseId);
     }
 
     public Teacher teacherValuesUpdate() {
@@ -90,6 +103,7 @@ public class Teacher {
         teacher.setFirstName(app.verifyString("Ange förnamn: "));
         teacher.setLastName(app.verifyString("Ange efternamn: "));
         teacher.setSSN(app.verifyString("Ange personnummer, endast siffror (12 siffror): "));
+        teacher.setCourseId(app.verifyInteger("Ange programmets ID: "));
 
         return teacher;
     }

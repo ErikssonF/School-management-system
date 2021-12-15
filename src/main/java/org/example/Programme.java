@@ -79,9 +79,13 @@ public class Programme {
         StudentDao studentDao = new StudentDao();
         CourseDao courseDao = new CourseDao();
 
-        programmeName = app.verifyString("Utbildningens namn: ");
-        courseList.add(courseDao.getById("Skriv in id för den kurs du vill lägga till i utbildningen"));
-        studentList.add(studentDao.getById("Skriv in id för den student du vill lägga till i utbildningen"));
+        programmeName = app.verifyString("Programmets namn: ");
+
+        List<Course> courseList = new ArrayList<>();
+        courseList.add(courseDao.getById("Skriv in id för den kurs du vill lägga till i programmet"));
+
+        List<Student> studentList = new ArrayList<>();
+        studentList.add(studentDao.getById("Skriv in id för den elev du vill lägga till i programmet"));
 
         return new Programme(programmeName, courseList, studentList);
     }
@@ -92,15 +96,15 @@ public class Programme {
         StudentDao studentDao = new StudentDao();
         App app = new App();
 
-        Programme programme = programmeDao.getById("Skriv in id för den utbildning du vill uppdatera");
+        Programme programme = programmeDao.getById("Skriv in id för det programmet du vill uppdatera");
         programme.setProgrammeName(app.verifyString("Ange utbildningens namn: "));
 
         List<Course> courseList = new ArrayList<>();
-        courseList.add(courseDao.getById("Skriv in id för den kurs du vill lägga till i utbildningen"));
+        courseList.add(courseDao.getById("Skriv in id för den kurs du vill lägga till i programmet"));
         programme.setCourseList(courseList);
 
         List<Student> studentList = new ArrayList<>();
-        studentList.add(studentDao.getById("Skriv in id för den student du vill lägga till i utbildningen"));
+        studentList.add(studentDao.getById("Skriv in id för den elev du vill lägga till i programmet"));
         programme.setStudentList(studentList);
 
         return programme;

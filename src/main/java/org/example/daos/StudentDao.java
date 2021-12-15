@@ -52,12 +52,14 @@ public class StudentDao implements MainDao<Student> {
         return dc.em.find(Student.class, id);
     }
 
-//    private void commit() {
-//        m.em.getTransaction().commit();
-//    }
-//
-//    private void begin() {
-//        m.em.getTransaction().begin();
-//    }
+    public void numberOfStudentsInSchool(){
+        TypedQuery<Long> query = dc.em.createQuery("SELECT COUNT(s) FROM Student s", Long.class);
+        System.out.println("Antal elever i skolan: " + query.getResultList());
+    }
 
+    public void numberOfStudentsInProgramme(int programmeId){
+        TypedQuery<Long> query = dc.em.createQuery("SELECT COUNT(s) FROM Student s WHERE s.programmeId = :programmeId", Long.class);
+        query.setParameter("programmeId", programmeId);
+        System.out.println("Antal elever i program " + programmeId + " är: " + query.getResultList());
+    }
 }

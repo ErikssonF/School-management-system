@@ -60,7 +60,7 @@ public class App {
     private void printMenu() {
         System.out.println("""
         
-        Huvudmeny?
+        Huvudmeny, vad vill du hantera?
             1. Student
             2. Lärare
             3. Kurs
@@ -263,6 +263,7 @@ public class App {
     public Course courseCreate() {
         course.setCourseName(verifyString("Kursens namn: "));
         course.setTeacherList(getTeacherList());
+
         return course;
     }
 
@@ -301,7 +302,7 @@ public class App {
 
         for (int i = 1; i <= numberOfStudents; i++) {
             System.out.print("Skriv id för elev nummer " + i + ":");
-            studentList.add( studentDao.getById(""));
+            studentList.add(studentDao.getById(""));
         }
         return studentList;
     }

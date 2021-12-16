@@ -296,40 +296,31 @@ public class App {
 
     private List<Student> getStudentList(){
         List<Student> studentList = new ArrayList<>();
-        System.out.println("Hur många elever vill du lägga till i programmet?");
 
-        int numberOfStudents = Integer.parseInt(scan.nextLine());
+        int numberOfStudents = verifyInteger("Hur många elever vill du lägga till i programmet?");
+        for (int i = 1; i <= numberOfStudents; i++)
+            studentList.add(studentDao.getById("Skriv id för elev nummer " + i + ": "));
 
-        for (int i = 1; i <= numberOfStudents; i++) {
-            System.out.print("Skriv id för elev nummer " + i + ":");
-            studentList.add(studentDao.getById(""));
-        }
         return studentList;
     }
 
     private List<Teacher> getTeacherList(){
         List<Teacher> teacherList = new ArrayList<>();
-        System.out.println("Hur många lärare vill du lägga till i kursen?");
 
-        int numberOfTeachers = Integer.parseInt(scan.nextLine());
+        int numberOfTeachers = verifyInteger("Hur många lärare vill du lägga till i kursen?");
+        for (int i = 1; i <= numberOfTeachers; i++)
+            teacherList.add(teacherDao.getById("Skriv id för lärare nummer " + i + ": "));
 
-        for (int i = 1; i <= numberOfTeachers; i++) {
-            System.out.print("Skriv id för lärare nummer " + i + ":");
-            teacherList.add(teacherDao.getById(""));
-        }
         return teacherList;
     }
 
     private List<Course> getCourseList(){
         List<Course> courseList = new ArrayList<>();
-        System.out.println("Hur många kurser vill du lägga till i programmet?");
 
-        int numberOfCourse = Integer.parseInt(scan.nextLine());
+        int numberOfCourse = verifyInteger("Hur många kurser vill du lägga till i programmet?");
+        for (int i = 1; i <= numberOfCourse; i++)
+            courseList.add(courseDao.getById("Skriv id för kurs nummer " + i + ": "));
 
-        for (int i = 1; i <= numberOfCourse; i++) {
-            System.out.print("Skriv id för kurs nummer " + i + ":");
-            courseList.add(courseDao.getById(""));
-        }
         return courseList;
     }
 }

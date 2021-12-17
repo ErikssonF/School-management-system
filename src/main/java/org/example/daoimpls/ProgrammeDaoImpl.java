@@ -28,23 +28,35 @@ public class ProgrammeDaoImpl implements ProgrammeDao {
 
     @Override
     public void add(Programme programme) {
-        begin();
-        em.persist(programme);
-        commit();
+        try {
+            begin();
+            em.persist(programme);
+            commit();
+        } catch (Exception e) {
+            System.out.println("Något gick fel vid inmatning av uppgifter, försök igen");
+        }
     }
 
     @Override
     public void update(Programme programme) {
-        begin();
-        em.merge(programme);
-        em.getTransaction().commit();
+        try {
+            begin();
+            em.merge(programme);
+            commit();
+        } catch (Exception e) {
+            System.out.println("Något gick fel vid inmatning av uppgifter, försök igen");
+        }
     }
 
     @Override
     public void remove(Programme programme) {
-        begin();
-        em.remove(programme);
-        commit();
+        try {
+            begin();
+            em.remove(programme);
+            commit();
+        } catch (Exception e) {
+            System.out.println("Något gick fel vid inmatning av uppgifter, försök igen");
+        }
     }
 
     @Override

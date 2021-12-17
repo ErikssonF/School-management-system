@@ -25,23 +25,35 @@ public class TeacherDaoImpl implements TeacherDao {
 
     @Override
     public void add(Teacher teacher) {
-        begin();
-        em.persist(teacher);
-        commit();
+        try {
+            begin();
+            em.persist(teacher);
+            commit();
+        } catch (Exception e) {
+            System.out.println("Något gick fel vid inmatning av uppgifter, försök igen");
+        }
     }
 
     @Override
     public void update(Teacher teacher) {
-        begin();
-        em.merge(teacher);
-        commit();
+        try {
+            begin();
+            em.merge(teacher);
+            commit();
+        } catch (Exception e) {
+            System.out.println("Något gick fel vid inmatning av uppgifter, försök igen");
+        }
     }
 
     @Override
     public void remove(Teacher teacher) {
-        begin();
-        em.remove(teacher);
-        commit();
+        try {
+            begin();
+            em.remove(teacher);
+            commit();
+        } catch (Exception e) {
+            System.out.println("Något gick fel vid inmatning av uppgifter, försök igen");
+        }
     }
 
     @Override

@@ -5,6 +5,7 @@ import org.example.daos.CourseDao;
 import org.example.entities.Course;
 
 import javax.persistence.*;
+import java.sql.SQLException;
 import java.util.List;
 
 public class CourseDaoImpl implements CourseDao {
@@ -25,23 +26,35 @@ public class CourseDaoImpl implements CourseDao {
 
     @Override
     public void add(Course course) {
-        begin();
-        em.persist(course);
-        commit();
+        try {
+            begin();
+            em.persist(course);
+            commit();
+        } catch (Exception e) {
+            System.out.println("Något gick fel vid inmatning av uppgifter, försök igen");
+        }
     }
 
     @Override
     public void update(Course course) {
-        begin();
-        em.merge(course);
-        commit();
+        try {
+            begin();
+            em.merge(course);
+            commit();
+        } catch (Exception e) {
+            System.out.println("Något gick fel vid inmatning av uppgifter, försök igen");
+        }
     }
 
     @Override
     public void remove(Course course) {
-        begin();
-        em.remove(course);
-        commit();
+        try {
+            begin();
+            em.remove(course);
+            commit();
+        } catch (Exception e) {
+            System.out.println("Något gick fel vid inmatning av uppgifter, försök igen");
+        }
     }
 
     @Override

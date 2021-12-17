@@ -15,21 +15,21 @@ import java.util.Scanner;
 
 public class App {
 
-    boolean run = true;
+    private boolean run = true;
 
-    Scanner scan = new Scanner(System.in);
+    private final Scanner scan = new Scanner(System.in);
 
-    public StudentDaoImpl studentDao;
-    public TeacherDaoImpl teacherDao;
-    public CourseDaoImpl courseDao;
-    public ProgrammeDaoImpl programmeDao;
+    private StudentDaoImpl studentDao;
+    private TeacherDaoImpl teacherDao;
+    private CourseDaoImpl courseDao;
+    private ProgrammeDaoImpl programmeDao;
 
-    public Student student;
-    public Teacher teacher;
-    public Course course;
-    public Programme programme;
+    private Student student;
+    private Teacher teacher;
+    private Course course;
+    private Programme programme;
 
-    void initializer(){
+    private void initializer(){
         studentDao = new StudentDaoImpl();
         teacherDao = new TeacherDaoImpl();
         courseDao = new CourseDaoImpl();
@@ -227,11 +227,11 @@ public class App {
     }
 
     public Student studentCreate() {
-        student.setFirstName(verifyString("Ange förnamn: "));
-        student.setLastName(verifyString("Ange efternamn: "));
-        student.setSSN(verifyString("Ange personnummer, endast siffror (12 siffror): "));
+        String firstName = verifyString("Ange förnamn");
+        String lastName = verifyString("Ange efternamn");
+        String SSN = verifyString("Ange personnummer, endast siffror (12 siffror): ");
 
-        return student;
+        return new Student(firstName, lastName, SSN);
     }
 
     public Student studentUpdate() {
@@ -244,11 +244,11 @@ public class App {
     }
 
     public Teacher teacherCreate() {
-        teacher.setFirstName(verifyString("Ange förnamn: "));
-        teacher.setLastName(verifyString("Ange efternamn: "));
-        teacher.setSSN(verifyString("Ange personnummer, endast siffror (12 siffror): "));
+        String firstName = verifyString("Ange förnamn");
+        String lastName = verifyString("Ange efternamn");
+        String SSN = verifyString("Ange personnummer, endast siffror (12 siffror): ");
 
-        return teacher;
+        return new Teacher(firstName, lastName, SSN);
     }
 
     public Teacher teacherUpdate() {
@@ -261,10 +261,9 @@ public class App {
     }
 
     public Course courseCreate() {
-        course.setCourseName(verifyString("Kursens namn: "));
-        course.setTeacherList(getTeacherList());
+        String courseName = verifyString("Kursens namn: ");
 
-        return course;
+        return new Course(courseName, getTeacherList());
     }
 
     public Course courseUpdate() {
@@ -276,12 +275,9 @@ public class App {
     }
 
     public Programme programmeCreate() {
-        programme.setProgrammeName(verifyString("Programmets namn: "));
+        String programmeName = verifyString("Programmets namn: ");
 
-        programme.setStudentList(getStudentList());
-        programme.setCourseList(getCourseList());
-
-        return programme;
+        return new Programme(programmeName, getCourseList(), getStudentList());
     }
 
     public Programme programmeUpdate() {

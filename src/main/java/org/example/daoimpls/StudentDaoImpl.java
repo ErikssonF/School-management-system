@@ -25,23 +25,35 @@ public class StudentDaoImpl implements StudentDao {
 
     @Override
     public void add(Student student) {
-        begin();
-        em.persist(student);
-        commit();
+        try {
+            begin();
+            em.persist(student);
+            commit();
+        } catch (Exception e) {
+            System.out.println("Något gick fel vid inmatning av uppgifter, försök igen");
+        }
     }
 
     @Override
     public void update(Student student) {
-        begin();
-        em.merge(student);
-        commit();
+        try {
+            begin();
+            em.merge(student);
+            commit();
+        } catch (Exception e) {
+            System.out.println("Något gick fel vid inmatning av uppgifter, försök igen");
+        }
     }
 
     @Override
     public void remove(Student student) {
-        begin();
-        em.remove(student);
-        commit();
+        try {
+            begin();
+            em.remove(student);
+            commit();
+        } catch (Exception e) {
+            System.out.println("Något gick fel vid inmatning av uppgifter, försök igen");
+        }
     }
 
     @Override

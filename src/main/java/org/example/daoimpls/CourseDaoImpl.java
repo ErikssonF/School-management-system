@@ -5,7 +5,6 @@ import org.example.daos.CourseDao;
 import org.example.entities.Course;
 
 import javax.persistence.*;
-import java.sql.SQLException;
 import java.util.List;
 
 public class CourseDaoImpl implements CourseDao {
